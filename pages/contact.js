@@ -32,8 +32,8 @@ const ContactUs = () => {
                     <div className="col-lg-9">
                       <p className="font-md color-grey-500">
                         Request a demo, ask a question, or get in touch here. If
-                        you’re interested in working at Iori Coporation, check
-                        out our
+                        you’re interested in working at Namami Cleans, check out
+                        our
                         <Link className="ml-3" href="/career">
                           {" "}
                           careers page.
