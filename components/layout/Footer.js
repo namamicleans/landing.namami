@@ -24,7 +24,7 @@ const Footer = () => {
                 <h6 className="color-brand-1">Follow Us</h6>
                 <div className="mt-15">
                   <Link className="icon-socials icon-facebook" href="#" />
-                  <Link className="icon-socials icon-instagram" href="#" />
+                  <Link className="icon-socials icon-instagram" href="https://www.instagram.com/namamicleans/" />
                   <Link className="icon-socials icon-twitter" href="#" />
                   <Link className="icon-socials icon-linkedin" href="#" />
                   <Link className="icon-socials icon-youtube" href="#" />

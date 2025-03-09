@@ -18,20 +18,20 @@ const pagePrice = () => {
 
       <Layout>
         <section className="section bg-plan-3 pt-110 pb-0">
-          <div class="container">
-            <div class="row align-items-end">
-              <div class="col-lg-8 col-md-8">
-                <h2 class="color-brand-1 mb-20">Choose The Best Plan</h2>
-                <p class="font-lg color-gray-500">
-                  Pick your plan. <br class="d-none d-lg-block" /> Change
+          <div className="container">
+            <div className="row align-items-end">
+              <div className="col-lg-8 col-md-8">
+                <h2 className="color-brand-1 mb-20">Choose The Best Plan</h2>
+                <p className="font-lg color-gray-500">
+                  Pick your plan. <br className="d-none d-lg-block" /> Change
                   whenever you want.
                 </p>
               </div>
-              <div class="col-lg-4 col-md-4 text-md-end text-start">
-                <a class="btn btn-default font-sm-bold pl-0">
+              <div className="col-lg-4 col-md-4 text-md-end text-start">
+                <a className="btn btn-default font-sm-bold pl-0">
                   Compare plans
                   <svg
-                    class="w-6 h-6 icon-16 ml-5"
+                    className="w-6 h-6 icon-16 ml-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -47,27 +47,27 @@ const pagePrice = () => {
                 </a>
               </div>
             </div>
-            <div class="row mt-50">
-              <div class="col-xl-3 col-lg-6 col-md-6">
-                <div class="card-plan hover-up">
-                  <div class="card-image-plan">
-                    <div class="icon-plan">
+            <div className="row mt-50">
+              <div className="col-xl-3 col-lg-6 col-md-6">
+                <div className="card-plan hover-up">
+                  <div className="card-image-plan">
+                    <div className="icon-plan">
                       <img
                         src="assets/imgs/page/homepage1/free.svg"
                         alt="iori"
                       />
                     </div>
-                    <div class="info-plan">
-                      <h4 class="color-brand-1">One Time Plan</h4>
-                      <p class="font-md color-grey-400">One-time service</p>
+                    <div className="info-plan">
+                      <h4 className="color-brand-1">One Time Plan</h4>
+                      <p className="font-md color-grey-400">One-time service</p>
                     </div>
                   </div>
-                  <div class="box-day-trial">
-                    <span class="font-lg-bold color-brand-1">Rs. X,XXX</span>
-                    <span class="font-md color-grey-500"> per month</span>
+                  <div className="box-day-trial">
+                    <span className="font-lg-bold color-brand-1">Rs. X,XXX</span>
+                    <span className="font-md color-grey-500"> per month</span>
                   </div>
-                  <div class="mt-30 mb-30">
-                    <ul class="list-ticks list-ticks-2">
+                  <div className="mt-30 mb-30">
+                    <ul className="list-ticks list-ticks-2">
                       <li>Regular cleaning service (monthly/weekly)</li>
                       <li>Priority booking and exclusive offers</li>
                       <li>Discounted rates for long-term plans</li>
@@ -78,11 +78,11 @@ const pagePrice = () => {
                       </li>
                     </ul>
                   </div>
-                  <div class="mt-20">
-                    <Link class="btn btn-brand-1-full hover-up" href="#">
+                  <div className="mt-20">
+                    <Link className="btn btn-brand-1-full hover-up" href="#">
                       Get Started
                       <svg
-                        class="w-6 h-6 icon-16 ml-10"
+                        className="w-6 h-6 icon-16 ml-10"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -99,26 +99,26 @@ const pagePrice = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6 col-md-6">
-                <div class="card-plan hover-up">
-                  <div class="card-image-plan">
-                    <div class="icon-plan bg-1">
+              <div className="col-xl-3 col-lg-6 col-md-6">
+                <div className="card-plan hover-up">
+                  <div className="card-image-plan">
+                    <div className="icon-plan bg-1">
                       <img
                         src="assets/imgs/page/homepage1/standard.svg"
                         alt="iori"
                       />
                     </div>
-                    <div class="info-plan">
-                      <h4 class="color-brand-1">Monthly Plan</h4>
-                      <p class="font-md color-grey-400">Regular service</p>
+                    <div className="info-plan">
+                      <h4 className="color-brand-1">Monthly Plan</h4>
+                      <p className="font-md color-grey-400">Regular service</p>
                     </div>
                   </div>
-                  <div class="box-day-trial">
-                    <span class="font-lg-bold color-brand-1">Rs. X,XXX</span>
-                    <span class="font-md color-grey-500"> per month</span>
+                  <div className="box-day-trial">
+                    <span className="font-lg-bold color-brand-1">Rs. X,XXX</span>
+                    <span className="font-md color-grey-500"> per month</span>
                   </div>
-                  <div class="mt-30 mb-30">
-                    <ul class="list-ticks list-ticks-2">
+                  <div className="mt-30 mb-30">
+                    <ul className="list-ticks list-ticks-2">
                       <li>Regular cleaning service (monthly/weekly)</li>
                       <li>Priority booking and exclusive offers</li>
                       <li>Discounted rates for long-term plans</li>
@@ -129,11 +129,11 @@ const pagePrice = () => {
                       </li>
                     </ul>
                   </div>
-                  <div class="mt-20">
-                    <Link class="btn btn-brand-1-full hover-up" href="#">
+                  <div className="mt-20">
+                    <Link className="btn btn-brand-1-full hover-up" href="#">
                       Get Started
                       <svg
-                        class="w-6 h-6 icon-16 ml-10"
+                        className="w-6 h-6 icon-16 ml-10"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -150,30 +150,30 @@ const pagePrice = () => {
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6 col-md-6">
-                <div class="card-plan card-plan-2 hover-up">
-                  <div class="card-image-plan">
-                    <div class="icon-plan bg-2">
+              <div className="col-xl-3 col-lg-6 col-md-6">
+                <div className="card-plan card-plan-2 hover-up">
+                  <div className="card-image-plan">
+                    <div className="icon-plan bg-2">
                       <img
                         src="assets/imgs/page/homepage1/business.svg"
                         alt="iori"
                       />
                     </div>
-                    <div class="info-plan">
-                      <h4 class="color-brand-1">Annual Plan</h4>
-                      <p class="font-md color-grey-400">With discount</p>
+                    <div className="info-plan">
+                      <h4 className="color-brand-1">Annual Plan</h4>
+                      <p className="font-md color-grey-400">With discount</p>
                     </div>
                   </div>
-                  <div class="box-day-trial">
-                    <span class="font-lg-bold color-brand-1">Rs. XX,XXX</span>
-                    <span class="font-md color-grey-500"> per year</span>
+                  <div className="box-day-trial">
+                    <span className="font-lg-bold color-brand-1">Rs. XX,XXX</span>
+                    <span className="font-md color-grey-500"> per year</span>
                     <br />
-                    <span class="font-xs color-grey-500">
+                    <span className="font-xs color-grey-500">
                       Save X% with annual plan
                     </span>
                   </div>
-                  <div class="mt-30 mb-30">
-                    <ul class="list-ticks list-ticks-2">
+                  <div className="mt-30 mb-30">
+                    <ul className="list-ticks list-ticks-2">
                       <li>Regular cleaning service (monthly/weekly)</li>
                       <li>Priority booking and exclusive offers</li>
                       <li>Discounted rates for long-term plans</li>
@@ -184,11 +184,11 @@ const pagePrice = () => {
                       </li>
                     </ul>
                   </div>
-                  <div class="mt-20">
-                    <Link class="btn btn-brand-1-full hover-up" href="#">
+                  <div className="mt-20">
+                    <Link className="btn btn-brand-1-full hover-up" href="#">
                       Get Started
                       <svg
-                        class="w-6 h-6 icon-16 ml-10"
+                        className="w-6 h-6 icon-16 ml-10"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

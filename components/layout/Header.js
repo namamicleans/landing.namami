@@ -36,17 +36,33 @@ const Header = ({ handleOpen, handleRemove, openClass, addClass }) => {
                         Home
                       </Link>
                     </li>
-                    <li className="">
-                      <Link className="" href="/service">
+                    <li className="dropdown">
+                      <a className="dropdown-toggle" onClick={toggleLanguageTrueFalse}>
                         Service
-                      </Link>
+                      </a>
+                      <ul className={`dropdown-menu ${isLanguageToggled ? "d-block" : "d-none"}`}>
+                        <li>
+                          <Link href="/service/service1">Car Cleaning</Link>
+                        </li>
+                        <li>
+                          <Link href="/service/service2">Water Tank Cleaning</Link>
+                        </li>
+                        <li>
+                          <Link href="/service/service3">Solar Panel Cleaning</Link>
+                        </li>
+                        <li>
+                          <Link href="/service/service3">Sofa Cleaning</Link>
+                        </li>
+                        <li>
+                          <Link href="/service/service4">Carpet Cleaning</Link>
+                        </li>
+                      </ul>
                     </li>
                     <li className="">
                       <Link className="" href="/about">
                         About
                       </Link>
                     </li>
-
                     <li>
                       <Link href="/contact">Contact</Link>
                     </li>

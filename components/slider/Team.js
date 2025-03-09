@@ -88,7 +88,7 @@ const Team = () => {
                 className="swiper-container swiper-group-4"
             >
                 {data.map((item, i) => (
-                    <SwiperSlide class="swiper-slide">
+                    <SwiperSlide className="swiper-slide">
                         <div className={`card-member-2 mb-30 ${item.color}`}>
                             <div className="card-image"><img src={`/assets/imgs/page/homepage8/${item.img}`} alt="iori" /></div>
                             <div className={`card-info ${item.color2}`}><a className="font-lg-bold color-brand-1" href="#">Steven Jobs</a>

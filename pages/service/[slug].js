@@ -1,11 +1,17 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import Image from 'next/image';
 import React, { useState } from 'react';
-import Layout from '../components/layout/Layout';
-import Offer from '../components/slider/Offer';
+import { useRouter } from 'next/router'
+
+import Layout from '../../components/layout/Layout';
+import Offer from '../../components/slider/Offer';
 
 const pageServices = () => {
     const [pricing, setPricing] = useState(1);
+    const router = useRouter()
+
+    console.log(router.query.slug, 'slug')
 
     const handlePricing = (index) => {
         setPricing(index); // remove the curly braces
@@ -17,45 +23,43 @@ const pageServices = () => {
             </Head>
 
             <Layout>
-              <section className="section banner-service bg-grey-60 position-relative">
-                  <div className="box-banner-abs">
-                      <div className="container">
-                          <div className="row align-items-center">
-                              <div className="col-xxl-6 col-xl-7 col-lg-12">
-                                  <div className="box-banner-service">
-                                      <h1 className="color-brand-1 mb-20">Professional Cleaning Services</h1>
-                                      <div className="row">
-                                          <div className="col-lg-9">
-                                              <p className="font-md color-grey-500">At Namami Cleans, we provide top-quality cleaning services tailored to your needs. Whether it's your car, home, or business, our team is ready to help with a wide range of cleaning services, including car cleaning, water tank cleaning, sofa and carpet cleaning, solar panel cleaning, and more.</p>
-                                          </div>
-                                      </div>
-                                      <div className="mt-30">
-                                          <h5 className="color-brand-1">Get Your Cleaning Service Today!</h5>
-                                      </div>
-                                      <div className="box-button mt-20">
-                                          <Link className="btn-app mb-15 hover-up" href="#"> <img src="assets/imgs/template/appstore-btn.png" alt="Namami Cleans App Store" /></Link>
-                                          <Link className="btn-app mb-15 hover-up" href="#"> <img src="assets/imgs/template/google-play-btn.png" alt="Namami Cleans Google Play" /></Link>
-                                          <Link className="btn btn-default mb-15 pl-10 font-sm-bold hover-up" href="#">
-                                              Learn More
-                                              <svg className="w-6 h-6 icon-16 ml-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                              </svg>
-                                          </Link>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="row m-0">
-                      <div className="col-xxl-5 col-xl-7 col-lg-6" />
-                      <div className="col-xxl-7 col-xl-5 col-lg-6 pr-0">
-                          <div className="d-none d-xxl-block pl-70">
-                              <img className="w-100 d-block" src="https://content.jdmagicbox.com/comp/kanpur/f6/0512px512.x512.221231123706.p6f6/catalogue/urban-pestico-govind-nagar-kanpur-anti-termite-pipe-treatment-services-mpvjncrh6m.jpg" alt="Namami Cleans - Professional Cleaning" />
-                          </div>
-                      </div>
-                  </div>
-              </section>
+                <section className="section banner-service bg-grey-60 position-relative">
+                    <div className="box-banner-abs">
+                        <div className="container">
+                            <div className="row align-items-center">
+                                <div className="col-xxl-6 col-xl-7 col-lg-12">
+                                    <div className="box-banner-service">
+                                        <h1 className="color-brand-1 mb-20">Professional Cleaning Services</h1>
+                                        <div className="row">
+                                            <div className="col-lg-9">
+                                                <p className="font-md color-grey-500">At Namami Cleans, we provide top-quality cleaning services tailored to your needs. Whether it's your car, home, or business, our team is ready to help with a wide range of cleaning services, including car cleaning, water tank cleaning, sofa and carpet cleaning, solar panel cleaning, and more.</p>
+                                            </div>
+                                        </div>
+                                        <div className="mt-30">
+                                            <h5 className="color-brand-1">Get Your Cleaning Service Today!</h5>
+                                        </div>
+                                        <div className="box-button mt-20">
+                                            <Link className="btn-app mb-15 hover-up" href="#">
+                                                <Image src="/assets/imgs/template/appstore-btn.png" alt="Namami Cleans App Store" height={50} width={150} />
+                                            </Link>
+                                            <Link className="btn-app mb-15 hover-up" href="#">
+                                                <Image src="/assets/imgs/template/google-play-btn.png" alt="Namami Cleans Google Play" height={50} width={150} />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row m-0">
+                        <div className="col-xxl-5 col-xl-7 col-lg-6" />
+                        <div className="col-xxl-7 col-xl-5 col-lg-6 pr-0">
+                            <div className="d-none d-xxl-block pl-70">
+                                <img className="w-100 d-block" src="https://content.jdmagicbox.com/comp/kanpur/f6/0512px512.x512.221231123706.p6f6/catalogue/urban-pestico-govind-nagar-kanpur-anti-termite-pipe-treatment-services-mpvjncrh6m.jpg" alt="Namami Cleans - Professional Cleaning" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <section className="section mt-100">
                     <div className="container">
@@ -87,54 +91,56 @@ const pageServices = () => {
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Car Cleaning
+                                                </svg>
+                                                Car Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Water Tank Cleaning
+                                                </svg>
+                                                Water Tank Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Sofa Cleaning
+                                                </svg>
+                                                Sofa Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Carpet Cleaning
+                                                </svg>
+                                                Carpet Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Solar Panel Cleaning
+                                                </svg>
+                                                House Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Kitchen Chimney Cleaning
+                                                </svg>
+                                                Offices Cleaning
                                             </li>
                                             <li>
                                                 <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Newly Built House Cleaning
+                                                </svg>
+                                                Others
                                             </li>
                                         </ul>
                                     </div>
                                     <div className="mt-50 text-start">
                                         <Link className="btn btn-brand-1 hover-up" href="#">Download Our App</Link>
-                                        <Link className="btn btn-default font-sm-bold hover-up" href="#">Learn More
-                                            <svg className="w-6 h-6 icon-16 ml-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-7">
                                     <div className="box-business-service">
                                         <div className="box-number-1 shape-2">
                                             <div className="cardNumber bg-white">
-                                                <h3>25k+</h3>
+                                                <h3>9k+</h3>
                                                 <p className="font-xs color-brand-1">Happy Clients</p>
                                             </div>
                                         </div>
@@ -144,11 +150,11 @@ const pageServices = () => {
                                         <div className="box-image-2 shape-2">
                                             <img src="assets/imgs/page/service/img2.png" alt="Sofa Cleaning" />
                                         </div>
-                                        <div className="box-image-3 shape-1">
+                                        <div className="box-image-3 shape-1" style={{ width: '50%' }}>
                                             <img src="assets/imgs/page/service/img4.png" alt="Water Tank Cleaning" />
                                             <div className="cardNumber bg-white">
-                                                <h2 className="color-brand-1">469k</h2>
-                                                <p className="font-lg color-brand-1">Social Followers</p>
+                                                <h2 className="color-brand-1">100+</h2>
+                                                <p className="font-lg color-brand-1">Cleanings Done Daily</p>
                                             </div>
                                         </div>
                                     </div>
