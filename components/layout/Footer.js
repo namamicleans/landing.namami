@@ -23,10 +23,10 @@ const Footer = () => {
                 </div>
                 <h6 className="color-brand-1">Follow Us</h6>
                 <div className="mt-15">
-                  <Link className="icon-socials icon-facebook" href="#" />
+                  <Link className="icon-socials icon-facebook" href="https://www.facebook.com/profile.php?id=61567913092300" />
                   <Link className="icon-socials icon-instagram" href="https://www.instagram.com/namamicleans/" />
                   <Link className="icon-socials icon-twitter" href="#" />
-                  <Link className="icon-socials icon-linkedin" href="#" />
+                  <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/company/namami-cleans" />
                   <Link className="icon-socials icon-youtube" href="#" />
                 </div>
               </div>

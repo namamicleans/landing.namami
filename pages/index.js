@@ -288,7 +288,6 @@ const HomePage7 = () => {
                     </div>
                 </div>
             </section>
-
             <section className="section mt-90">
                 <div className="container">
                     <div className="row align-items-start">
@@ -298,70 +297,52 @@ const HomePage7 = () => {
                         </div>
                     </div>
                     <div className="row align-items-start">
-                        <div className="col-lg-3 col-md-6 col-sm-6">
+                        <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="card-team mb-30">
                                 <div className="card-image">
-                                    <img src="/bhuvneshCEO.JPG" alt="Bhuvnesh - CEO" />
+                                    <Image src="/bhuvneshCEO.jpg" alt="Bhuvnesh - CEO" height={200} width={240} />
                                 </div>
                                 <div className="card-info">
                                     <Link className="font-lg" href="#">Bhuvnesh</Link>
                                     <p className="font-xs color-grey-200 mb-10">CEO</p>
                                     <p className="font-xs color-grey-400">Leading Namami Cleans with a passion for sustainability and innovation, transforming how cleanliness is achieved.</p>
                                     <div className="list-socials">
-                                        <Link className="icon-socials icon-facebook" href="#" />
-                                        <Link className="icon-socials icon-instagram" href="#" />
-                                        <Link className="icon-socials icon-twitter" href="#" />
+                                        <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/bhuvnesh-singh-sikarwar-19104011b" />
+                                        <Link className="icon-socials icon-instagram" href="https://www.instagram.com/bhuvneshsikarwar" />
+                                        <Link className="icon-socials icon-facebook" href="https://www.facebook.com/share/1DfWybHxCQ/?mibextid=wwXIfr" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6">
+                        <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="card-team mb-30">
                                 <div className="card-image">
-                                    <img src="/assets/imgs/page/about/team2.png" alt="Jane Smith - Finance Manager" />
+                                    <Image src="/devanshCOO.jpg" alt="Devansh Smith - Finance Manager" height={200} width={240} />
                                 </div>
                                 <div className="card-info">
-                                    <Link className="font-lg" href="#">Jane Smith</Link>
-                                    <p className="font-xs color-grey-200 mb-10">Finance Manager</p>
+                                    <Link className="font-lg" href="#">Devansh</Link>
+                                    <p className="font-xs color-grey-200 mb-10">COO</p>
                                     <p className="font-xs color-grey-400">Ensuring financial stability while supporting innovative cleaning solutions that align with our values.</p>
                                     <div className="list-socials">
-                                        <Link className="icon-socials icon-facebook" href="#" />
-                                        <Link className="icon-socials icon-instagram" href="#" />
-                                        <Link className="icon-socials icon-twitter" href="#" />
+                                        <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/devansh-sengar-8a9252303" />
+                                        <Link className="icon-socials icon-instagram" href="https://www.instagram.com/zenith_pursuer" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6">
+                        <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="card-team mb-30">
                                 <div className="card-image">
-                                    <img src="/assets/imgs/page/about/team3.png" alt="Alex Johnson - Technology Manager" />
+                                    <Image src="/jatinCTO.png" alt="Jatin Kshatriya - Technology Manager" height={200} width={240}/>
                                 </div>
                                 <div className="card-info">
-                                    <Link className="font-lg" href="#">Alex Johnson</Link>
-                                    <p className="font-xs color-grey-200 mb-10">Technology Manager</p>
+                                    <Link className="font-lg" href="#">Jatin Kshatriya</Link>
+                                    <p className="font-xs color-grey-200 mb-10">CTO</p>
                                     <p className="font-xs color-grey-400">Driving technological advancements to ensure Namami Cleans stays ahead in the cleaning industry.</p>
                                     <div className="list-socials">
-                                        <Link className="icon-socials icon-facebook" href="#" />
-                                        <Link className="icon-socials icon-instagram" href="#" />
-                                        <Link className="icon-socials icon-twitter" href="#" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="card-team mb-30">
-                                <div className="card-image">
-                                    <img src="/assets/imgs/page/team/team1.png" alt="Emily Davis - Director of Operations" />
-                                </div>
-                                <div className="card-info">
-                                    <Link className="font-lg" href="#">Emily Davis</Link>
-                                    <p className="font-xs color-grey-200 mb-10">Director of Operations</p>
-                                    <p className="font-xs color-grey-400">Ensuring seamless operations and delivering exceptional cleaning services to all our clients.</p>
-                                    <div className="list-socials">
-                                        <Link className="icon-socials icon-facebook" href="#" />
-                                        <Link className="icon-socials icon-instagram" href="#" />
-                                        <Link className="icon-socials icon-twitter" href="#" />
+                                        <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/jatin-kshatriya-a9a879214" />
+                                        <Link className="icon-socials icon-instagram" href="https://www.instagram.com/jatin_kshatriya/" />
+                                        <Link className="icon-socials icon-twitter" href="https://x.com/kshatriya2821" />
                                     </div>
                                 </div>
                             </div>

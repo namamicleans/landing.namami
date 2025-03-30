@@ -1,21 +1,42 @@
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router'
 
 import Layout from '../../components/layout/Layout';
 import Offer from '../../components/slider/Offer';
 
 const pageServices = () => {
     const [pricing, setPricing] = useState(1);
+    const handlePricing = (index) => setPricing(index);
     const router = useRouter()
+    const [service, setService] = useState(null);
 
-    console.log(router.query.slug, 'slug')
+    console.log(router.query.slug, 'params')
 
-    const handlePricing = (index) => {
-        setPricing(index); // remove the curly braces
-    };
+    useEffect(() => {
+        const fetchService = async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/service/get-service/${router.query.slug}`);
+            const data = await response.json();
+            console.log(data, 'data');
+            setService(data);
+        }
+        if (router.query.slug) fetchService();
+    }, []);
+
+    if (!service) return (
+        <Layout>
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12 text-center">
+                        <h2 className="color-brand-1 mb-20">Not Found</h2>
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    )
+
     return (
         <>
             <Head>
@@ -29,10 +50,10 @@ const pageServices = () => {
                             <div className="row align-items-center">
                                 <div className="col-xxl-6 col-xl-7 col-lg-12">
                                     <div className="box-banner-service">
-                                        <h1 className="color-brand-1 mb-20">Professional Cleaning Services</h1>
+                                        <h1 className="color-brand-1 mb-20">{service.name}</h1>
                                         <div className="row">
                                             <div className="col-lg-9">
-                                                <p className="font-md color-grey-500">At Namami Cleans, we provide top-quality cleaning services tailored to your needs. Whether it's your car, home, or business, our team is ready to help with a wide range of cleaning services, including car cleaning, water tank cleaning, sofa and carpet cleaning, solar panel cleaning, and more.</p>
+                                                <p className="font-md color-grey-500">{service.description}</p>
                                             </div>
                                         </div>
                                         <div className="mt-30">
@@ -72,7 +93,7 @@ const pageServices = () => {
                         <div className="mt-50">
                             <div className="box-swiper">
                                 <div className="swiper-container swiper-group-4">
-                                    <Offer />
+                                    <Offer services={service.services} />
                                 </div>
                             </div>
                         </div>
@@ -88,48 +109,15 @@ const pageServices = () => {
                                     <p className="font-md color-grey-400">From car cleaning to solar panel maintenance, Namami Cleans provides top-notch cleaning services to meet your needs. Our team ensures the highest quality for every job, offering reliable and efficient solutions.</p>
                                     <div className="mt-20">
                                         <ul className="list-ticks">
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Car Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Water Tank Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Sofa Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Carpet Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                House Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Offices Cleaning
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                Others
-                                            </li>
+                                            {service.services.map(service =>
+                                                <li>
+                                                    <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    {service.name}
+                                                </li>
+
+                                            )}
                                         </ul>
                                     </div>
                                     <div className="mt-50 text-start">
@@ -177,219 +165,66 @@ const pageServices = () => {
                             </div>
                         </div>
                         <div className="row mt-50">
-                            <div className="col-xl-3 col-lg-6 col-md-6">
-                                <div className="card-plan-style-2 hover-up">
-                                    <div className="card-plan">
-                                        <div className="card-image-plan">
-                                            <div className="icon-plan"> <img src="assets/imgs/page/homepage1/free.svg" alt="iori" /></div>
-                                            <div className="info-plan">
-                                                <h4 className="color-brand-1">Trial Plan</h4>
-                                                <p className="font-md color-grey-400">Protect for testing</p>
+                            {
+                                service.packages.map(plan =>
+                                    <div className="col-xl-3 col-lg-6 col-md-6">
+                                        <div className="card-plan-style-2 hover-up">
+                                            <div className="card-plan">
+                                                <div className="card-image-plan">
+                                                    <div className="icon-plan bg-1"> <img src="assets/imgs/page/homepage1/standard.svg" alt="iori" /></div>
+                                                    <div className="info-plan">
+                                                        <h4 className="color-brand-1">{plan.name}</h4>
+                                                        <p className="font-md color-grey-400">{plan.service.name}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="box-day-trial"> <span className="font-lg-bold color-brand-1 text-price-standard">₹{plan.price} </span> <span className="font-md color-grey-500 text-type-standard">- user / month </span><br /><span className="font-xs color-grey-500">Billed annually</span></div>
+                                                <div className="mt-20">
+                                                    <Link className="btn btn-brand-1-full hover-up" href="#">Get Started
+                                                        <svg className="w-6 h-6 icon-16 ml-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                        </svg>
+                                                    </Link>
+                                                </div>
                                             </div>
+                                            {/* <div className="mt-30 mb-30">
+                                                <ul className="list-ticks list-ticks-2">
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Brand Awareness Ads
+                                                    </li>
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Retargeting Ads
+                                                    </li>
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Contextual, Demographic
+                                                    </li>
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Contextual, Demographic
+                                                    </li>
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Contextual, Demographic
+                                                    </li>
+                                                    <li>
+                                                        <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>Contextual, Demographic
+                                                    </li>
+                                                </ul>
+                                            </div> */}
                                         </div>
-                                        <div className="box-day-trial"> <span className="font-lg-bold color-brand-1">FREE </span> <span className="font-md color-grey-500">- 30 days trial </span><br /><span className="font-xs color-grey-500">No Credit card required</span></div>
-                                        <div className="mt-20"> <Link className="btn btn-brand-1-full hover-up" href="#">Try for free
-                                            <svg className="w-6 h-6 icon-16 ml-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg></Link></div>
                                     </div>
-                                    <div className="mt-30 mb-30">
-                                        <ul className="list-ticks list-ticks-2">
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Brand Awareness Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Retargeting Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-xl-3 col-lg-6 col-md-6">
-                                <div className="card-plan-style-2 hover-up">
-                                    <div className="card-plan">
-                                        <div className="card-image-plan">
-                                            <div className="icon-plan bg-1"> <img src="assets/imgs/page/homepage1/standard.svg" alt="iori" /></div>
-                                            <div className="info-plan">
-                                                <h4 className="color-brand-1">Standard</h4>
-                                                <p className="font-md color-grey-400">Advanced project</p>
-                                            </div>
-                                        </div>
-                                        <div className="box-day-trial"> <span className="font-lg-bold color-brand-1 text-price-standard">${pricing == 1 ? "29" : "388"} </span> <span className="font-md color-grey-500 text-type-standard">- user / month </span><br /><span className="font-xs color-grey-500">Billed annually</span></div>
-                                        <div className="mt-20"> <Link className="btn btn-brand-1-full hover-up" href="#">Get Started
-                                            <svg className="w-6 h-6 icon-16 ml-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg></Link></div>
-                                    </div>
-                                    <div className="mt-30 mb-30">
-                                        <ul className="list-ticks list-ticks-2">
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Brand Awareness Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Retargeting Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-xl-3 col-lg-6 col-md-6">
-                                <div className="card-plan-style-2 hover-up">
-                                    <div className="card-plan">
-                                        <div className="card-image-plan">
-                                            <div className="icon-plan bg-2"> <img src="assets/imgs/page/homepage1/business.svg" alt="iori" /></div>
-                                            <div className="info-plan">
-                                                <h4 className="color-brand-1">Business</h4>
-                                                <p className="font-md color-grey-400">Protect for testing</p>
-                                            </div>
-                                        </div>
-                                        <div className="box-day-trial"> <span className="font-lg-bold color-brand-1 text-price-business">${pricing == 1 ? "99" : "1,188"} </span> <span className="font-md color-grey-500 text-type-business">- user / month</span><br /><span className="font-xs color-grey-500">Billed annually</span></div>
-                                        <div className="mt-20"> <Link className="btn btn-brand-1-full hover-up" href="#">Get Started
-                                            <svg className="w-6 h-6 icon-16 ml-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg></Link></div>
-                                    </div>
-                                    <div className="mt-30 mb-30">
-                                        <ul className="list-ticks list-ticks-2">
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Brand Awareness Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Retargeting Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-xl-3 col-lg-6 col-md-6">
-                                <div className="card-plan-style-2 hover-up">
-                                    <div className="card-plan">
-                                        <div className="card-image-plan">
-                                            <div className="icon-plan bg-3"> <img src="assets/imgs/page/homepage1/enterprise.svg" alt="iori" /></div>
-                                            <div className="info-plan">
-                                                <h4 className="color-brand-1">Enterprise</h4>
-                                                <p className="font-md color-grey-400">Protect for testing</p>
-                                            </div>
-                                        </div>
-                                        <div className="box-day-trial"> <span className="font-lg-bold color-brand-1 text-price-enterprise">${pricing == 1 ? "299" : "3,588"} </span> <span className="font-md color-grey-500 text-type-enterprise">- user / month</span><br /><span className="font-xs color-grey-500">One-time pay</span></div>
-                                        <div className="mt-20"> <Link className="btn btn-brand-1-full hover-up" href="#">Get Started
-                                            <svg className="w-6 h-6 icon-16 ml-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg></Link></div>
-                                    </div>
-                                    <div className="mt-30 mb-30">
-                                        <ul className="list-ticks list-ticks-2">
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Brand Awareness Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Retargeting Ads
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                            <li>
-                                                <svg className="w-6 h-6 icon-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>Contextual, Demographic
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
+                                )
+                            }
                         </div>
                         <div className="border-bottom mt-30" />
                     </div>

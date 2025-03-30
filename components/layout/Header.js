@@ -5,8 +5,9 @@ const Header = ({ handleOpen, handleRemove, openClass, addClass }) => {
   const [scroll, setScroll] = useState(0);
   const [isSearchToggled, setSearchToggled] = useState(false);
   const [isLanguageToggled, setLanguageToggled] = useState(false);
-  const toggleSearchTrueFalse = () => setSearchToggled(!isSearchToggled);
   const toggleLanguageTrueFalse = () => setLanguageToggled(!isLanguageToggled);
+  const [services, setServices] = useState([]);
+
   useEffect(() => {
     document.addEventListener("scroll", () => {
       const scrollCheck = window.scrollY > 100;
@@ -14,7 +15,20 @@ const Header = ({ handleOpen, handleRemove, openClass, addClass }) => {
         setScroll(scrollCheck);
       }
     });
-  });
+
+    const fetchServices = async () => {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/service/get-service`);
+      const data = await response.json();
+      console.log(data);
+      setServices(data);
+    }
+    fetchServices();
+
+    return () => {
+      document.removeEventListener("scroll", () => { });
+    };
+  }, []);
+
   return (
     <>
       <header
@@ -41,21 +55,10 @@ const Header = ({ handleOpen, handleRemove, openClass, addClass }) => {
                         Service
                       </a>
                       <ul className={`dropdown-menu ${isLanguageToggled ? "d-block" : "d-none"}`}>
-                        <li>
-                          <Link href="/service/service1">Car Cleaning</Link>
+                        {services?.map((service) => <li>
+                          <Link href={`/service/${service.service_code}`}>{service.name}</Link>
                         </li>
-                        <li>
-                          <Link href="/service/service2">Water Tank Cleaning</Link>
-                        </li>
-                        <li>
-                          <Link href="/service/service3">Solar Panel Cleaning</Link>
-                        </li>
-                        <li>
-                          <Link href="/service/service3">Sofa Cleaning</Link>
-                        </li>
-                        <li>
-                          <Link href="/service/service4">Carpet Cleaning</Link>
-                        </li>
+                        )}
                       </ul>
                     </li>
                     <li className="">

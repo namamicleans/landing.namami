@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 import React from "react";
@@ -98,46 +99,6 @@ const pageAbout = () => {
         </section>
         <section className="section mt-90 pb-50 bg-core-value">
           <div className="container">
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="item-core mb-30">
-                  <div className="item-image">
-                    <img src="assets/imgs/page/about/img1.png" alt="iori" />
-                  </div>
-                  <div className="item-desc">
-                    <p className="font-md color-grey-400 mb-15">
-                      “Whether you are working from home, at the office or at
-                      the job site, we provide flexible tools so you can connect
-                      and collaborate on waterfall projects, agile projects and
-                      everything in between.”
-                    </p>
-                    <h6 className="color-brand-1">Ralph Edwards</h6>
-                    <span className="color-grey-500 font-xs">
-                      Chairman of the board
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="item-core mb-30">
-                  <div className="item-image">
-                    <img src="assets/imgs/page/about/img2.png" alt="iori" />
-                  </div>
-                  <div className="item-desc">
-                    <p className="font-md color-grey-400 mb-15">
-                      “We created a revolutionary online knowledge and
-                      competencies assessment solution. It empowers thousands of
-                      organizations worldwide to grow by allowing them to get a
-                      broader picture and draw better conclusions”
-                    </p>
-                    <h6 className="color-brand-1">Ralph Edwards</h6>
-                    <span className="color-grey-500 font-xs">
-                      Chairman of the board
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="row box-list-core-value">
               {/* Core Values Introduction */}
               <div className="col-lg-4 mb-70">
@@ -318,91 +279,65 @@ const pageAbout = () => {
           <div className="container">
             <div className="row align-items-start">
               <div className="col-lg-6">
-                <h6 className="color-brand-1 mb-20">Our leadership team</h6>
-                <h2 className="color-brand-1 mb-50">
-                  Meet the amazing team behind Iori
-                </h2>
+                <h6 className="color-brand-1 mb-20">Our Leadership Team</h6>
+                <h2 className="color-brand-1 mb-50">Meet the visionaries behind Namami Cleans</h2>
               </div>
             </div>
             <div className="row align-items-start">
-              <div className="col-lg-3 col-md-4 col-sm-6">
+              <div className="col-lg-4 col-md-6 col-sm-6">
                 <div className="card-team mb-30">
                   <div className="card-image">
-                    <img src="assets/imgs/page/about/team1.png" alt="iori" />
+                    <Image src="/bhuvneshCEO.jpg" alt="Bhuvnesh - CEO" height={200} width={240} />
                   </div>
                   <div className="card-info">
-                    <Link className="font-lg" href="#">
-                      Devon Lane
-                    </Link>
+                    <Link className="font-lg" href="#">Bhuvnesh</Link>
                     <p className="font-xs color-grey-200 mb-10">CEO</p>
-                    <p className="font-xs color-grey-400">
-                      Sharing content online allows you to craft an online
-                      persona that reflects your personal values and
-                      professional skills. Even if you only use social media
-                      occasionally
-                    </p>
+                    <p className="font-xs color-grey-400">Leading Namami Cleans with a passion for sustainability and innovation, transforming how cleanliness is achieved.</p>
                     <div className="list-socials">
-                      <Link className="icon-socials icon-facebook" href="#" />
-                      <Link className="icon-socials icon-instagram" href="#" />
-                      <Link className="icon-socials icon-twitter" href="#" />
+                      <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/bhuvnesh-singh-sikarwar-19104011b" />
+                      <Link className="icon-socials icon-instagram" href="https://www.instagram.com/bhuvneshsikarwar" />
+                      <Link className="icon-socials icon-facebook" href="https://www.facebook.com/share/1DfWybHxCQ/?mibextid=wwXIfr" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-4 col-sm-6">
+              <div className="col-lg-4 col-md-6 col-sm-6">
                 <div className="card-team mb-30">
                   <div className="card-image">
-                    <img src="assets/imgs/page/about/team2.png" alt="iori" />
+                    <Image src="/devanshCOO.jpg" alt="Devansh Smith - Finance Manager" height={200} width={240} />
                   </div>
                   <div className="card-info">
-                    <Link className="font-lg" href="#">
-                      Jennie Tho
-                    </Link>
-                    <p className="font-xs color-grey-200 mb-10">
-                      Finance Manager
-                    </p>
-                    <p className="font-xs color-grey-400">
-                      Excepteur sint occaecat cupidatat non proident, sunt in
-                      culpa qui officia deserunt mollit laborum — semper quis
-                      lectus.
-                    </p>
+                    <Link className="font-lg" href="#">Devansh</Link>
+                    <p className="font-xs color-grey-200 mb-10">COO</p>
+                    <p className="font-xs color-grey-400">Ensuring financial stability while supporting innovative cleaning solutions that align with our values.</p>
                     <div className="list-socials">
-                      <Link className="icon-socials icon-facebook" href="#" />
-                      <Link className="icon-socials icon-instagram" href="#" />
-                      <Link className="icon-socials icon-twitter" href="#" />
+                      <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/devansh-sengar-8a9252303" />
+                      <Link className="icon-socials icon-instagram" href="https://www.instagram.com/zenith_pursuer" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-4 col-sm-6">
+              <div className="col-lg-4 col-md-6 col-sm-6">
                 <div className="card-team mb-30">
                   <div className="card-image">
-                    <img src="assets/imgs/page/about/team3.png" alt="iori" />
+                    <Image src="/jatinCTO.png" alt="Jatin Kshatriya - Technology Manager" height={200} width={240} />
                   </div>
                   <div className="card-info">
-                    <Link className="font-lg" href="#">
-                      Symon Lesin
-                    </Link>
-                    <p className="font-xs color-grey-200 mb-10">
-                      Technology Manager
-                    </p>
-                    <p className="font-xs color-grey-400">
-                      In a professional context it often happens that private or
-                      corporate clientsorder a publication to publish news.
-                      Excepteur sint occaecat cupidatat non proident,
-                    </p>
+                    <Link className="font-lg" href="#">Jatin Kshatriya</Link>
+                    <p className="font-xs color-grey-200 mb-10">CTO</p>
+                    <p className="font-xs color-grey-400">Driving technological advancements to ensure Namami Cleans stays ahead in the cleaning industry.</p>
                     <div className="list-socials">
-                      <Link className="icon-socials icon-facebook" href="#" />
-                      <Link className="icon-socials icon-instagram" href="#" />
-                      <Link className="icon-socials icon-twitter" href="#" />
+                      <Link className="icon-socials icon-linkedin" href="https://www.linkedin.com/in/jatin-kshatriya-a9a879214" />
+                      <Link className="icon-socials icon-instagram" href="https://www.instagram.com/jatin_kshatriya/" />
+                      <Link className="icon-socials icon-twitter" href="https://x.com/kshatriya2821" />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div className="border-bottom mt-30" />
         </section>
-
         <section className="section mt-100 box-testimonial-2">
           <div className="container">
             <div className="row align-items-center">
