@@ -22,7 +22,7 @@ const SEO: React.FC<SEOProps> = ({
   canonicalUrl,
 }) => {
   const siteUrl = "https://namamicleans.com"; // Replace with your actual domain
-  const defaultImage = "/public/namami_logo.png"; // Default image for social sharing
+  const defaultImage = "/namami_logo.png"; // Default image for social sharing
 
   return (
     <Helmet>

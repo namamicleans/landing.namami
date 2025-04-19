@@ -106,7 +106,7 @@ const About = () => {
 
             <div>
               <img
-                src="public/lovable-uploads/team.png"
+                src="/lovable-uploads/team.png"
                 alt="Our team members working together"
                 className="rounded-lg shadow-xl"
                 loading="lazy"
@@ -300,7 +300,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="public/lovable-uploads/ourstyle.jpg"
+                src="/lovable-uploads/ourstyle.jpg"
                 alt="Our professional cleaning approach in action"
                 className="rounded-lg shadow-xl w-[500px] h-[700px] object-cover"
                 loading="lazy"

@@ -103,9 +103,9 @@ const Index = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [services, setServices] = useState([]);
   const heroImages = [
-    "public/lovable-uploads/hero1.jpg",
-    "public/lovable-uploads/hero2.jpg",
-    "public/lovable-uploads/hero3.jpg",
+    "/lovable-uploads/hero1.jpg",
+    "/lovable-uploads/hero2.jpg",
+    "/lovable-uploads/hero3.jpg",
   ];
 
   useEffect(() => {
@@ -252,7 +252,7 @@ const Index = () => {
 
             <div className="relative">
               <img
-                src="public/lovable-uploads/clean_cta.png"
+                src="/lovable-uploads/clean_cta.png"
                 alt="Cleaning professional"
                 className="rounded-lg shadow-xl w-full h-fit object-cover object-top"
               />
@@ -387,7 +387,7 @@ const Index = () => {
 
             <div className="relative h-96">
               <img
-                src="public/lovable-uploads/captain_cta.jpg"
+                src="/lovable-uploads/captain_cta.jpg"
                 alt="Join our team"
                 className="rounded-lg shadow-xl w-full h-full object-cover"
               />

@@ -47,7 +47,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="z-10">
-          <img src="public/namami_logo.png" alt="Logo" className="h-8" />
+          <img src="/namami_logo.png" alt="Logo" className="h-8" />
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">

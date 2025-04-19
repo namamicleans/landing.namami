@@ -300,7 +300,7 @@ const Hiring = () => {
 
             <div>
               <img
-                src="public/lovable-uploads/team.png"
+                src="/lovable-uploads/team.png"
                 alt="Our team members"
                 className="rounded-lg shadow-xl"
               />
@@ -403,7 +403,7 @@ const Hiring = () => {
 
             <div className="relative">
               <img
-                src="public/lovable-uploads/captain_cta.jpg"
+                src="/lovable-uploads/captain_cta.jpg"
                 alt="Cleaning Captain"
                 className="rounded-lg shadow-xl"
               />

@@ -103,7 +103,7 @@ const Captain = () => {
 
             <div className="relative hidden lg:block">
               <img
-                src="public/lovable-uploads/clean_cta.jpg"
+                src="/lovable-uploads/clean_cta.jpg"
                 alt="Cleaning Captain"
                 className="rounded-lg shadow-xl"
               />
