@@ -1,26 +1,15 @@
 import React, { useState } from "react";
-import { Star, Play, ExternalLink } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Play } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface TestimonialCardProps {
   name: string;
-  role: string;
-  testimonial: string;
-  rating: number;
-  image?: string;
   videoId?: string;
-  socialLink?: string;
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
   name,
-  role,
-  testimonial,
-  rating,
-  image,
   videoId,
-  socialLink,
 }) => {
   const [videoPlaying, setVideoPlaying] = useState(false);
 
@@ -56,63 +45,6 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           ></iframe>
         </AspectRatio>
       ) : null}
-
-      <div className="p-6">
-        <div className="flex items-center mb-4">
-          <Avatar className="h-14 w-14 border-2 border-primary/10">
-            {image ? (
-              <AvatarImage src={image} alt={name} />
-            ) : (
-              <AvatarFallback className="bg-gradient-to-br from-primary-300 to-primary-600 text-white text-xl font-bold">
-                {name.charAt(0)}
-              </AvatarFallback>
-            )}
-          </Avatar>
-
-          <div className="ml-4">
-            <div className="flex items-center gap-2">
-              <h4 className="font-semibold text-lg">{name}</h4>
-              {socialLink && (
-                <a
-                  href={socialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80"
-                >
-                  <ExternalLink size={16} />
-                </a>
-              )}
-            </div>
-            <p className="text-gray-600 text-sm">{role}</p>
-
-            <div className="flex mt-1">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  size={16}
-                  className={
-                    i < rating
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-gray-300"
-                  }
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <p className="text-gray-700 italic text-base leading-relaxed line-clamp-4">
-            "{testimonial}"
-          </p>
-          <span className="absolute -top-2 -left-1 text-6xl text-primary/10 font-serif">
-            "
-          </span>
-          <span className="absolute -bottom-8 -right-1 text-6xl text-primary/10 font-serif rotate-180">
-            "
-          </span>
-        </div>
-      </div>
     </div>
   );
 };

@@ -16,48 +16,25 @@ import LocationSearch from "@/components/LocationSearch";
 import CategorySlider from "@/components/CategorySlider";
 import ServiceSlider from "@/components/ServiceSlider";
 import { getServices } from "@/services/service";
+import Cookies from "js-cookie";
 
-// Sample data
+
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "Homeowner",
-    testimonial:
-      "Absolutely impressed with the quality of service! The team was professional, thorough, and left my home spotless. Will definitely use again.",
-    rating: 5,
-    videoId: "dQw4w9WgXcQ",
-    socialLink: "https://twitter.com/sarahjohnson",
+    name: "Aman Sharma",
+    videoId: "lh_rCvk-cSM",
   },
   {
-    name: "Michael Rodriguez",
-    role: "Office Manager",
-    testimonial:
-      "We have been using Namami Cleans for our office spaces for over a year now. Their consistent quality and reliability have made them an essential partner for our business.",
-    rating: 5,
-    videoId: "dQw4w9WgXcQ",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80",
+    name: "Sanjay Seth",
+    videoId: "n4Ovhfth4K0",
   },
   {
-    name: "Emma Thompson",
-    role: "Apartment Resident",
-    testimonial:
-      "As a busy professional, finding time to deep clean my apartment was impossible. Namami Cleans came to my rescue and did an amazing job! Highly recommend.",
-    rating: 4,
-    videoId: "dQw4w9WgXcQ",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80",
-    socialLink: "https://linkedin.com/in/emmathompson",
+    name: "Dhruv Seth",
+    videoId: "1efrVAePcpo",
   },
   {
-    name: "David Chen",
-    role: "Restaurant Owner",
-    testimonial:
-      "The cleaning team was thorough and professional. They worked with our schedule to ensure minimal disruption to our business operations. Excellent service!",
-    rating: 5,
-    videoId: "dQw4w9WgXcQ",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80",
+    name: "Vivek",
+    videoId: "DeChJZhUwV0",
   },
 ];
 
@@ -159,26 +136,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Category Slider */}
-      <section className="py-16 bg-white">
-        <CategorySlider
-          title=" Wide Categories"
-          description="Explore our range of professional cleaning categories"
-          categories={services}
-          viewAllLink="/services#categories"
-        />
-      </section>
+      {Cookies.get("selected_city") ? <>
+        {/* Category Slider */}
+        <section className="py-16 bg-white">
+          <CategorySlider
+            title=" Wide Categories"
+            description="Explore our range of professional cleaning categories"
+            categories={services}
+            viewAllLink="/services#categories"
+          />
+        </section>
 
-      {/* Featured Services */}
-      <section className="py-16 bg-gray-50">
-        <ServiceSlider
-          title="Featured Services"
-          description="Our most popular cleaning services tailored to meet your needs"
-          services={services.filter(service => service.is_featured)}
-          viewAllLink={`/services`}
-          className="mb-8"
-        />
-      </section>
+        {/* Featured Services */}
+        <section className="py-16 bg-gray-50">
+          <ServiceSlider
+            title="Featured Services"
+            description="Our most popular cleaning services tailored to meet your needs"
+            services={services.filter(service => service.is_featured)}
+            viewAllLink={`/services`}
+            className="mb-8"
+          />
+        </section>
+      </> : <div className="h-[20vh] flex items-center justify-center">
+        <p className="text-xl text-gray-600">Please select a city to view services.</p>
+      </div>}
 
       {/* Why Choose Us */}
       <section className="py-16 bg-white">
@@ -397,7 +378,7 @@ const Index = () => {
       </section>
 
       {/* Blog Section */}
-      <section className="py-16 bg-gray-50">
+      {/* <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl font-bold text-primary-800">
@@ -426,7 +407,7 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-16 bg-primary">

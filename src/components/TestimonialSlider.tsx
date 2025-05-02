@@ -7,12 +7,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
 interface Testimonial {
   name: string;
-  role: string;
-  testimonial: string;
-  rating: number;
-  image?: string;
   videoId?: string;
-  socialLink?: string;
 }
 
 interface TestimonialSliderProps {
@@ -60,7 +55,7 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
           )}
         </div>
 
-        <Carousel 
+        <Carousel
           setApi={setApi}
           plugins={[autoplay]}
           opts={{
@@ -74,12 +69,7 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 px-4">
                 <TestimonialCard
                   name={testimonial.name}
-                  role={testimonial.role}
-                  testimonial={testimonial.testimonial}
-                  rating={testimonial.rating}
-                  image={testimonial.image}
                   videoId={testimonial.videoId}
-                  socialLink={testimonial.socialLink}
                 />
               </CarouselItem>
             ))}
@@ -87,21 +77,20 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
 
           <div className="flex justify-center mt-8 space-x-2">
             <CarouselPrevious className="static translate-y-0" />
-            
+
             <div className="flex items-center space-x-2">
               {testimonials.map((_, index) => (
                 <Button
                   key={index}
                   variant="ghost"
                   size="icon"
-                  className={`w-3 h-3 p-0 rounded-full ${
-                    current === index ? 'bg-primary' : 'bg-gray-300'
-                  }`}
+                  className={`w-3 h-3 p-0 rounded-full ${current === index ? 'bg-primary' : 'bg-gray-300'
+                    }`}
                   onClick={() => api?.scrollTo(index)}
                 />
               ))}
             </div>
-            
+
             <CarouselNext className="static translate-y-0" />
           </div>
         </Carousel>
