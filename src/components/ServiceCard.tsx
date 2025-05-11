@@ -11,6 +11,7 @@ interface ServicePackage {
   price: number;
   originalPrice: number;
   frequency: number;
+  service_code: string
 }
 
 interface ServiceCardProps {
@@ -92,7 +93,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         )}
 
         <Link
-          to={`https://app.namamicleans.com/${id}`}
+          to={`https://app.namamicleans.com/service/${id}`}
           target="_blank"
           className=""
         >
@@ -133,7 +134,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     </div>
                   </div>
                   <Link
-                    to={`https://app.namamicleans.com/subscribe/${id}?plan=${pkg.type}`}
+                    to={`https://app.namamicleans.com/service/${pkg.service_code}`}
                     target="_blank"
                   >
                     <Button

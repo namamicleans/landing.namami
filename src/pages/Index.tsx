@@ -94,8 +94,8 @@ const Index = () => {
 
   useEffect(() => {
     getServices().then(data => {
-      console.log(data, 'services');
-      if (data) setServices(data);
+      console.log(data.services, 'services');
+      if (data) setServices(data.services);
     });
   }, []);
 
@@ -140,7 +140,7 @@ const Index = () => {
         {/* Category Slider */}
         <section className="py-16 bg-white">
           <CategorySlider
-            title=" Wide Categories"
+            title="Wide Categories"
             description="Explore our range of professional cleaning categories"
             categories={services}
             viewAllLink="/services#categories"

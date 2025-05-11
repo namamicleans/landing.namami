@@ -3,19 +3,50 @@ export interface City {
     name: string;
 }
 
+export interface Category {
+    id: string;
+    name: string;
+    icon?: string;
+}
+
+
+export interface ServiceHomeResponse {
+    services: Service[],
+    recently_viewed_services: Service[],
+}
+
+export interface ServicePackage {
+    base_price: number;
+    duration: number;
+    icon: string;
+    id: number;
+    is_active: boolean;
+    min_visits: number;
+    name: string;
+    plan_type: {
+        name: string;
+        duration: number;
+    };
+    extra_price_per_visit: number;
+    service: string
+    service_code: string;
+}
+
 export interface Service {
     service_code: string;
     name: string;
-    category: string;
     description: string;
-    icon: string;
-    gallery: string[];
+    category: Category;
+    subscription_plans: ServicePackage[];
+    city: string;
     is_active: boolean;
     is_featured: boolean;
+    available_cities: string[];
+    base_price: number;
+    gallery: string[] | null;
     slots: number;
-    tags: string[];
-    city: string;
-    packages: Packages[];
+    icon: string;
+    rating: number;
 }
 
 export interface Packages {

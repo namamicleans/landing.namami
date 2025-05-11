@@ -26,8 +26,8 @@ const Services = () => {
     getServices().then(data => {
       console.log(data, 'services');
       if (data) {
-        setServices(data);
-        serviceCategories[0].services = data;
+        setServices(data.services);
+        serviceCategories[0].services = data.services;
       }
     });
   }, []);
@@ -77,9 +77,9 @@ const Services = () => {
                 key={service.service_code}
                 id={service.service_code}
                 title={service.name}
-                category={service.category}
-                price={service.packages.reduce((min, pkg) => Math.min(min, pkg.base_price), Infinity)}
-                originalPrice={service.packages.reduce((max, pkg) => Math.max(max, pkg.base_price), 0)}
+                category={service.category.name}
+                price={service.subscription_plans.reduce((min, pkg) => Math.min(min, pkg.base_price), Infinity)}
+                originalPrice={service.subscription_plans.reduce((max, pkg) => Math.max(max, pkg.base_price), 0)}
                 duration={service.slots * 90 + " min"}
                 rating={service.rating || 4.5}
                 image={service.gallery?.[0]}
