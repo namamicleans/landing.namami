@@ -8,6 +8,7 @@ import {
   Shield,
   Play,
   Star,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TestimonialSlider from "@/components/TestimonialSlider";
@@ -17,6 +18,7 @@ import CategorySlider from "@/components/CategorySlider";
 import ServiceSlider from "@/components/ServiceSlider";
 import { getServices } from "@/services/service";
 import Cookies from "js-cookie";
+import { Service } from "@/types/types";
 
 
 const testimonials = [
@@ -39,46 +41,50 @@ const testimonials = [
 ];
 
 
-const blogs = [
-  {
-    id: "1",
-    title: "10 Tips for Keeping Your Home Clean Between Professional Cleanings",
-    excerpt:
-      "Learn simple daily habits that can help maintain the cleanliness of your home between professional cleaning sessions.",
-    date: "June 15, 2023",
-    readTime: "5 min read",
-    image:
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Home Tips",
-  },
-  {
-    id: "2",
-    title: "The Benefits of Green Cleaning for Your Family's Health",
-    excerpt:
-      "Discover how eco-friendly cleaning products and methods can improve your family's health and reduce environmental impact.",
-    date: "May 22, 2023",
-    readTime: "7 min read",
-    image:
-      "https://images.unsplash.com/photo-1556911220-bda9d6c3a469?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Health",
-  },
-  {
-    id: "3",
-    title: "How Often Should You Clean Different Areas of Your Home?",
-    excerpt:
-      "A comprehensive guide to cleaning frequencies for different areas and items in your home to maintain optimal cleanliness.",
-    date: "April 10, 2023",
-    readTime: "6 min read",
-    image:
-      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Cleaning Guide",
-  },
-];
+// const blogs = [
+//   {
+//     id: "1",
+//     title: "10 Tips for Keeping Your Home Clean Between Professional Cleanings",
+//     excerpt:
+//       "Learn simple daily habits that can help maintain the cleanliness of your home between professional cleaning sessions.",
+//     date: "June 15, 2023",
+//     readTime: "5 min read",
+//     image:
+//       "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+//     category: "Home Tips",
+//   },
+//   {
+//     id: "2",
+//     title: "The Benefits of Green Cleaning for Your Family's Health",
+//     excerpt:
+//       "Discover how eco-friendly cleaning products and methods can improve your family's health and reduce environmental impact.",
+//     date: "May 22, 2023",
+//     readTime: "7 min read",
+//     image:
+//       "https://images.unsplash.com/photo-1556911220-bda9d6c3a469?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+//     category: "Health",
+//   },
+//   {
+//     id: "3",
+//     title: "How Often Should You Clean Different Areas of Your Home?",
+//     excerpt:
+//       "A comprehensive guide to cleaning frequencies for different areas and items in your home to maintain optimal cleanliness.",
+//     date: "April 10, 2023",
+//     readTime: "6 min read",
+//     image:
+//       "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+//     category: "Cleaning Guide",
+//   },
+// ];
 
 
 const Index = () => {
   const [activeImage, setActiveImage] = useState(0);
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<Service[] | null>([]);
+  const [loading, setLoading] = useState(false);
+
+  const session = Cookies.get("selected_city");
+
   const heroImages = [
     "/lovable-uploads/hero1.jpg",
     "/lovable-uploads/hero2.jpg",
@@ -93,11 +99,15 @@ const Index = () => {
   }, [heroImages.length]);
 
   useEffect(() => {
+    setLoading(true);
     getServices().then(data => {
-      console.log(data.services, 'services');
       if (data) setServices(data.services);
+      setLoading(false);
+    }).catch(error => {
+      console.error("Error fetching services:", error);
+      setLoading(false);
     });
-  }, []);
+  }, [session]);
 
 
   return (
@@ -136,7 +146,7 @@ const Index = () => {
         </div>
       </section>
 
-      {Cookies.get("selected_city") ? <>
+      {session && services ? <>
         {/* Category Slider */}
         <section className="py-16 bg-white">
           <CategorySlider
@@ -157,9 +167,12 @@ const Index = () => {
             className="mb-8"
           />
         </section>
-      </> : <div className="h-[20vh] flex items-center justify-center">
+      </> : (loading ? <div className="h-[20vh] flex items-center justify-center">
+        <p className="text-xl text-gray-600">Loading services...</p>
+        <Loader2 className="animate-spin h-4 w-4" />
+      </div> : <div className="h-[20vh] flex items-center justify-center">
         <p className="text-xl text-gray-600">Please select a city to view services.</p>
-      </div>}
+      </div>)}
 
       {/* Why Choose Us */}
       <section className="py-16 bg-white">

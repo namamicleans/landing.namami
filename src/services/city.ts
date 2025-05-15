@@ -15,7 +15,7 @@ export const getCities = async (): Promise<City[]> => {
 }
 
 export const setSelectedCity = (city: City) => {
-    Cookies.set("selected_city", JSON.stringify(city));
+    Cookies.set("selected_city", JSON.stringify(city), { expires: 365 });
 };
 
 export const getSelectedCity = () => {

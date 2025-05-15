@@ -40,11 +40,7 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"}`}>
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="z-10">
           <img src="/namami_logo.png" alt="Logo" className="h-8" />
@@ -55,15 +51,14 @@ const Navbar = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`font-medium transition-colors duration-300 ${
-                scrolled
-                  ? location.pathname === link.path
-                    ? "text-primary"
-                    : "text-gray-700 hover:text-primary"
-                  : isHomePage
-                    ? "text-white hover:text-gray-200"
-                    : "text-primary hover:text-primary-600"
-              }`}
+              className={`font-medium transition-colors duration-300 ${scrolled
+                ? location.pathname === link.path
+                  ? "text-primary"
+                  : "text-gray-700 hover:text-primary"
+                : isHomePage
+                  ? "text-white hover:text-gray-200"
+                  : "text-primary hover:text-primary-600"
+                }`}
             >
               {link.name}
             </Link>
@@ -101,11 +96,10 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         <div
-          className={`fixed inset-0 bg-gradient-to-tl from-primary-500 to-primary-800 transition-all duration-300 ${
-            isOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          }`}
+          className={`fixed inset-0 bg-gradient-to-tl from-primary-500 to-primary-800 transition-all duration-300 ${isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+            }`}
         >
           <div className="container mx-auto h-full flex flex-col justify-center items-center">
             {navLinks.map((link) => (

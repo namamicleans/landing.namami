@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Building2, Locate, ChevronDown } from "lucide-react";
+import { MapPin, Building2, Locate, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,16 +29,18 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const cities = await getCities();
-      setCities(cities);
-    })()
-  }, [])
+    const fetchCities = async () => {
+      const allCities = await getCities();
+      setCities(allCities);
+    };
 
-  useEffect(() => {
-    const data = getSelectedCity();
-    console.log("Response:", data);
-    // if (selectedCity) setLocation(selectedCity.name);
+    const loadCityFromStorage = async () => {
+      const selectedCity = await getSelectedCity();
+      if (selectedCity) setLocation(selectedCity.name);
+    };
+
+    fetchCities();
+    loadCityFromStorage();
   }, []);
 
   const handleCitySelect = (city: City) => {
@@ -64,8 +66,9 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
       //   },
       // );
     } else {
-      setIsLocating(false);
+      alert("Geolocation is not supported by this browser.");
     }
+    setIsLocating(false);
   };
 
   return (
@@ -88,7 +91,6 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
                   setLocation(e.target.value);
                   if (!suggestionsOpen) setSuggestionsOpen(true);
                 }}
-                onFocus={() => setSuggestionsOpen(true)}
               />
             </PopoverTrigger>
             <PopoverContent align="start" className="mt-2 w-[50svw] md:w-[24svw] p-0">
@@ -107,8 +109,10 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
           </Popover>
 
           <Button onClick={handleLocate} className="m-2 w-4 h-fit md:size-fit">
-            <Locate className="h-3 w-3 md:h-5 md:w-5" />
-            <span className="hidden md:block">Locate</span>
+            {isLocating ? <Loader2 className="animate-spin h-4 w-4" /> : <Locate className="h-3 w-3 md:h-5 md:w-5" />}
+            <span className="hidden md:block">
+              Use my location
+            </span>
           </Button>
         </div>
 
