@@ -11,6 +11,7 @@ export const getCities = async (): Promise<City[]> => {
     const url = `${import.meta.env.VITE_SERVER_URL}/api/service/accessible-cities/`;
     const response = await fetch(url);
     const data: City[] = await response.json();
+    console.log("Fetched cities:", data);
     return data;
 }
 

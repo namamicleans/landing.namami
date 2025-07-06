@@ -4,11 +4,19 @@ export interface City {
 }
 
 export interface Category {
-    id: string;
+    id: number;
     name: string;
     icon?: string;
 }
 
+export interface ServiceSection {
+    id: number;
+    api_name: string;
+    heading: string;
+    content: string;
+    description: string;
+    icon: string;
+}
 
 export interface ServiceHomeResponse {
     services: Service[],
@@ -16,20 +24,19 @@ export interface ServiceHomeResponse {
 }
 
 export interface ServicePackage {
-    base_price: number;
-    duration: number;
-    icon: string;
     id: number;
-    is_active: boolean;
-    min_visits: number;
     name: string;
-    plan_type: {
-        name: string;
-        duration: number;
-    };
-    extra_price_per_visit: number;
-    service: string
+    icon: string;
     service_code: string;
+    service: string;
+    price_per_booking: number;
+    savings_per_booking: number;
+    slots_required: number;
+    total_bookings: number;
+    total_cost: number;
+    total_savings: number;
+    validity_days: number;
+    is_active: boolean;
 }
 
 export interface Service {
@@ -37,16 +44,20 @@ export interface Service {
     name: string;
     description: string;
     category: Category;
-    subscription_plans: ServicePackage[];
+    package_plans: ServicePackage[];
     city: string;
     is_active: boolean;
     is_featured: boolean;
-    available_cities: string[];
-    base_price: number;
-    gallery: string[] | null;
+    base_price: string;
+    price_display: string;
+    gallery: string[];
     slots: number;
-    icon: string;
-    rating: number;
+    min_quantity: number;
+    max_quantity: number;
+    is_quantity_based: boolean;
+    quantity_unit: string | null;
+    sections: ServiceSection[];
+    tags: string[];
 }
 
 export interface Packages {

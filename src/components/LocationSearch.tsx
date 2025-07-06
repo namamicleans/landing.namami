@@ -7,13 +7,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { getCities, setSelectedCity, getSelectedCity } from "@/services/city";
 import { City } from "@/types/types";
@@ -31,11 +24,13 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
   useEffect(() => {
     const fetchCities = async () => {
       const allCities = await getCities();
+      console.log("Fetched cities:", allCities);
       setCities(allCities);
     };
 
     const loadCityFromStorage = async () => {
       const selectedCity = await getSelectedCity();
+      console.log("Selected city from storage:", selectedCity);
       if (selectedCity) setLocation(selectedCity.name);
     };
 

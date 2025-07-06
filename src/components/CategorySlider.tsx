@@ -61,7 +61,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
                   <CategoryCard
                     id={category.service_code}
                     title={category.name}
-                    image={category.icon}
+                    image={category.category.icon || category.gallery?.[0] || '/placeholder.svg'}
                     // gradientFrom={category.gradientFrom}
                     // gradientTo={category.gradientTo}
                     className="h-full"

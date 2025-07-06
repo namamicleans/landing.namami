@@ -102,6 +102,7 @@ const Index = () => {
     setLoading(true);
     getServices().then(data => {
       if (data) setServices(data.services);
+      console.log("Fetched services:", data.services);
       setLoading(false);
     }).catch(error => {
       console.error("Error fetching services:", error);

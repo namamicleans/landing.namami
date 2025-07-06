@@ -42,10 +42,10 @@ const ServiceSlider: React.FC<ServiceSliderProps> = ({
                     id={service.service_code}
                     title={service.name}
                     category={service.category.name}
-                    price={service.subscription_plans.reduce((min, pkg) => Math.min(min, pkg.base_price), Infinity)}
-                    originalPrice={service.subscription_plans.reduce((max, pkg) => Math.max(max, pkg.base_price), 0)}
+                    price={service.package_plans.reduce((min, pkg) => Math.min(min, pkg.price_per_booking), Infinity)}
+                    originalPrice={service.package_plans.reduce((max, pkg) => Math.max(max, pkg.price_per_booking), 0)}
                     duration={(service.slots * 90).toString() + ' min'}
-                    rating={service.rating || 4.5}
+                    rating={4.5}
                     image={service.gallery?.[0]}
                     className="h-full"
                   />
