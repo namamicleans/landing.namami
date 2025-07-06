@@ -9,6 +9,7 @@ import {
   Play,
   Star,
   Loader2,
+  Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TestimonialSlider from "@/components/TestimonialSlider";
@@ -147,32 +148,265 @@ const Index = () => {
         </div>
       </section>
 
-      {session && services ? <>
-        {/* Category Slider */}
+      {session && services && services.length > 0 ? <>
+        {/* Service Stats */}
+        <section className="py-12 bg-gradient-to-r from-primary-50 to-secondary-50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-primary">{services.length}+</div>
+                <div className="text-sm text-gray-600">Services Available</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-primary">{services.filter(s => s.is_featured).length}</div>
+                <div className="text-sm text-gray-600">Featured Services</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-primary">₹{Math.min(...services.map(s => s.package_plans.reduce((min, pkg) => Math.min(min, pkg.price_per_booking), Infinity)))}</div>
+                <div className="text-sm text-gray-600">Starting Price</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-2xl font-bold text-primary">24/7</div>
+                <div className="text-sm text-gray-600">Support Available</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Services */}
         <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-primary-800 mb-4">
+                Featured Services
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Our most popular cleaning services with unbeatable prices and quality guarantee
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {services.filter(service => service.is_featured).slice(0, 6).map((service) => (
+                <div key={service.service_code} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                  <div className="relative">
+                    <img
+                      src={service.gallery?.[0] || "/placeholder.svg"}
+                      alt={service.name}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                        {service.category.name}
+                      </span>
+                    </div>
+                    {service.package_plans.some(pkg => pkg.savings_per_booking > 0) && (
+                      <div className="absolute top-4 right-4">
+                        <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          Save ₹{Math.max(...service.package_plans.map(pkg => pkg.savings_per_booking))}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{service.name}</h3>
+                    <p className="text-gray-600 mb-4">
+                      {service.sections.find(s => s.api_name === 'about-this-service')?.content || service.description || "Professional cleaning service tailored to your needs"}
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {Math.round(service.slots * 90)} min
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Star className="w-4 h-4 mr-1 text-yellow-400 fill-yellow-400" />
+                          4.8
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-primary">
+                          ₹{Math.min(...service.package_plans.map(pkg => pkg.price_per_booking))}
+                        </div>
+                        <div className="text-sm text-gray-500">Starting from</div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-2 mb-4">
+                      {service.package_plans.slice(0, 2).map((pkg) => (
+                        <div key={pkg.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                          <div className="flex items-center space-x-3">
+                            <div>
+                              <div className="font-medium text-sm">{pkg.name}</div>
+                              <div className="text-xs text-gray-600">{pkg.total_bookings} booking{pkg.total_bookings > 1 ? 's' : ''}</div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="font-bold text-primary">₹{pkg.price_per_booking}</div>
+                            {pkg.savings_per_booking > 0 && (
+                              <div className="text-xs text-green-600">Save ₹{pkg.savings_per_booking}</div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Link to={`https://app.namamicleans.com/service/${service.service_code}`} target="_blank">
+                      <Button className="w-full bg-primary text-white hover:bg-primary-600">
+                        Book Now
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center">
+              <Link to="/services">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
+                  View All Services <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Category Slider */}
+        <section className="py-16 bg-gray-50">
           <CategorySlider
-            title="Wide Categories"
-            description="Explore our range of professional cleaning categories"
+            title="Service Categories"
+            description="Explore our comprehensive range of professional cleaning categories"
             categories={services}
             viewAllLink="/services#categories"
           />
         </section>
 
-        {/* Featured Services */}
-        <section className="py-16 bg-gray-50">
-          <ServiceSlider
-            title="Featured Services"
-            description="Our most popular cleaning services tailored to meet your needs"
-            services={services.filter(service => service.is_featured)}
-            viewAllLink={`/services`}
-            className="mb-8"
-          />
+        {/* Service Highlights */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-primary-800 mb-4">
+                What Makes Our Services Special
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Every service comes with comprehensive features and benefits
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.slice(0, 3).map((service) => (
+                <div key={service.service_code} className="text-center">
+                  <img
+                    src={service.category.icon || "/placeholder.svg"}
+                    alt={service.category.name}
+                    className="w-16 h-16 mx-auto mb-4 rounded-full"
+                  />
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{service.category.name}</h3>
+                  <p className="text-gray-600 mb-4">
+                    {service.sections.find(s => s.api_name === 'whats-included')?.content || 
+                     "Professional service with quality guarantee and eco-friendly products"}
+                  </p>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="text-sm text-gray-600">Starting from</div>
+                    <div className="text-2xl font-bold text-primary">
+                      ₹{Math.min(...service.package_plans.map(pkg => pkg.price_per_booking))}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {service.package_plans.length} package{service.package_plans.length > 1 ? 's' : ''} available
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
-      </> : (loading ? <div className="h-[20vh] flex items-center justify-center">
+
+        {/* Pricing Comparison */}
+        <section className="py-16 bg-gradient-to-r from-primary-50 to-secondary-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-primary-800 mb-4">
+                Save More with Our Packages
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Compare our package deals and see how much you can save with bulk bookings
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.filter(service => service.package_plans.some(pkg => pkg.savings_per_booking > 0)).slice(0, 3).map((service) => (
+                <div key={service.service_code} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <img
+                        src={service.gallery?.[0] || "/placeholder.svg"}
+                        alt={service.name}
+                        className="w-12 h-12 rounded-lg object-cover mr-4"
+                      />
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">{service.name}</h3>
+                        <p className="text-sm text-gray-600">{service.category.name}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {service.package_plans.map((pkg) => (
+                        <div key={pkg.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                          <div>
+                            <div className="font-medium text-sm">{pkg.name}</div>
+                            <div className="text-xs text-gray-600">{pkg.total_bookings} booking{pkg.total_bookings > 1 ? 's' : ''}</div>
+                          </div>
+                          <div className="text-right">
+                            <div className="flex items-center gap-2">
+                              <div className="font-bold text-primary">₹{pkg.price_per_booking}</div>
+                              {pkg.savings_per_booking > 0 && (
+                                <div className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                                  Save ₹{pkg.savings_per_booking}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="mt-4 p-3 bg-primary-50 rounded-lg">
+                      <div className="text-center">
+                        <div className="text-sm text-primary-700 font-medium">
+                          Maximum Savings: ₹{Math.max(...service.package_plans.map(pkg => pkg.savings_per_booking))}
+                        </div>
+                        <div className="text-xs text-primary-600">
+                          per booking with {service.package_plans.find(pkg => pkg.savings_per_booking === Math.max(...service.package_plans.map(p => p.savings_per_booking)))?.name}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center mt-8">
+              <Link to="/services">
+                <Button className="bg-primary text-white hover:bg-primary-600">
+                  View All Services & Packages
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </> : (loading ? <div className="h-[40vh] flex flex-col items-center justify-center">
+        <Loader2 className="animate-spin h-8 w-8 text-primary mb-4" />
         <p className="text-xl text-gray-600">Loading services...</p>
-        <Loader2 className="animate-spin h-4 w-4" />
-      </div> : <div className="h-[20vh] flex items-center justify-center">
-        <p className="text-xl text-gray-600">Please select a city to view services.</p>
+        <p className="text-sm text-gray-500">Please wait while we fetch the best services for you</p>
+      </div> : <div className="h-[40vh] flex flex-col items-center justify-center">
+        <div className="text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">Select Your City</h3>
+          <p className="text-gray-600 mb-8">Please select a city to view our available services and start booking</p>
+          <div className="max-w-md mx-auto">
+            <LocationSearch />
+          </div>
+        </div>
       </div>)}
 
       {/* Why Choose Us */}

@@ -60,10 +60,11 @@ const CategorySlider: React.FC<CategorySliderProps> = ({
                 <div className="p-1">
                   <CategoryCard
                     id={category.service_code}
-                    title={category.name}
+                    title={category.category.name}
                     image={category.category.icon || category.gallery?.[0] || '/placeholder.svg'}
-                    // gradientFrom={category.gradientFrom}
-                    // gradientTo={category.gradientTo}
+                    serviceCount={1}
+                    startingPrice={Math.min(...category.package_plans.map(pkg => pkg.price_per_booking))}
+                    description={category.sections.find(s => s.api_name === 'about-this-service')?.content?.slice(0, 100) + '...' || 'Professional cleaning service'}
                     className="h-full"
                   />
                 </div>
