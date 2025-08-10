@@ -15,8 +15,8 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-primary-500 to-primary-900 text-white pt-16 pb-8">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="mb-8 lg:col-span-2">
             <Logo />
             <p className="mt-4 mb-6 text-gray-300">
               Professional cleaning services at your doorstep. We provide
@@ -145,6 +145,36 @@ const Footer = () => {
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Carpet Cleaning
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Legal</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/terms-and-conditions"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/refund-cancellation-policy"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
+                  Refund & Cancellation Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/privacy-policy"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
+                  Privacy Policy
                 </Link>
               </li>
             </ul>

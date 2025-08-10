@@ -14,6 +14,9 @@ import Captain from "./pages/Captain";
 import JobDetails from "./pages/jobDetails/JobDetails";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import RefundCancellationPolicy from "./pages/RefundCancellationPolicy";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
@@ -37,6 +40,9 @@ const App = () => {
               <Route path="/hiring/:id" element={<JobDetails />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogDetail />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicy />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
