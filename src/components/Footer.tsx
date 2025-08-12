@@ -93,14 +93,14 @@ const Footer = () => {
                   Careers
                 </Link>
               </li>
-              <li>
+{/*               <li>
                 <Link
                   to="/hiring/captain"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Become a Captain
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
