@@ -5,7 +5,7 @@ import ServiceCard from "@/components/ServiceCard";
 import CategorySlider from "@/components/CategorySlider";
 import ServiceSlider from "@/components/ServiceSlider";
 
-import { getServices } from "@/services/service";
+import { useServices } from "@/hooks/useServices";
 import { Service } from "@/types/types";
 
 // Service data
@@ -21,16 +21,23 @@ const serviceCategories = [
 const Services = () => {
 
   const [services, setServices] = useState<Service[]>([]);
+  const { getServices } = useServices();
 
   useEffect(() => {
     getServices().then(data => {
       console.log(data, 'services');
-      if (data) {
+      if (data && data.services) {
         setServices(data.services);
         serviceCategories[0].services = data.services;
+      } else {
+        console.log("No services data received");
+        setServices([]);
       }
+    }).catch(error => {
+      console.error("Error fetching services:", error);
+      setServices([]);
     });
-  }, []);
+  }, [getServices]);
 
   return (
     <div className="min-h-screen pt-20">

@@ -2,8 +2,26 @@ export interface City {
     id: number;
     name: string;
 }
+// Standardized API response type
+export interface ApiResponse<T = any> {
+  success: boolean;
+  message: string;
+  code: string;
+  data: T | null;
+  error?: any;
+  meta?: {
+    pagination?: any;
+    additional_info?: any;
+  };
+}
 
-export interface Category {
+// Service result type for handling responses without hooks
+export interface ServiceResult<T = any> {
+  success: boolean;
+  data: T | null;
+  message: string;
+  code?: string;
+}export interface Category {
     id: number;
     name: string;
     icon?: string;

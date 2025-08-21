@@ -8,7 +8,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { getCities, setSelectedCity, getSelectedCity } from "@/services/city";
+import { setSelectedCity, getSelectedCity } from "@/services/city";
+import { useCities } from "@/hooks/useServices";
 import { City } from "@/types/types";
 
 interface LocationSearchProps {
@@ -16,10 +17,11 @@ interface LocationSearchProps {
 }
 
 const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
-  const [location, setLocation] = useState<string>(null);
+  const [location, setLocation] = useState<string>("");
   const [cities, setCities] = useState<City[]>([]);
   const [isLocating, setIsLocating] = useState(false);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+  const { getCities } = useCities();
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -31,7 +33,9 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
     const loadCityFromStorage = async () => {
       const selectedCity = await getSelectedCity();
       console.log("Selected city from storage:", selectedCity);
-      if (selectedCity) setLocation(selectedCity.name);
+      if (selectedCity && selectedCity.name) {
+        setLocation(selectedCity.name);
+      }
     };
 
     fetchCities();
@@ -79,7 +83,7 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
             <PopoverTrigger asChild>
               <Input
                 type="text"
-                value={location}
+                value={location || ""}
                 placeholder="Enter your location"
                 className="w-full py-3 px-0 border-0 focus:ring-0 focus:outline-none text-gray-700"
                 onChange={(e) => {

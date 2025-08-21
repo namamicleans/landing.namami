@@ -17,7 +17,7 @@ import BlogCard from "@/components/BlogCard";
 import LocationSearch from "@/components/LocationSearch";
 import CategorySlider from "@/components/CategorySlider";
 import ServiceSlider from "@/components/ServiceSlider";
-import { getServices } from "@/services/service";
+import { useServices } from "@/hooks/useServices";
 import Cookies from "js-cookie";
 import { Service } from "@/types/types";
 
@@ -83,6 +83,7 @@ const Index = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [services, setServices] = useState<Service[] | null>([]);
   const [loading, setLoading] = useState(false);
+  const { getServices } = useServices();
 
   const session = Cookies.get("selected_city");
 
@@ -102,14 +103,20 @@ const Index = () => {
   useEffect(() => {
     setLoading(true);
     getServices().then(data => {
-      if (data) setServices(data.services);
-      console.log("Fetched services:", data.services);
+      if (data && data.services) {
+        setServices(data.services);
+        console.log("Fetched services:", data.services);
+      } else {
+        console.log("No services data received");
+        setServices([]);
+      }
       setLoading(false);
     }).catch(error => {
       console.error("Error fetching services:", error);
+      setServices([]);
       setLoading(false);
     });
-  }, [session]);
+  }, [session, getServices]);
 
 
   return (
