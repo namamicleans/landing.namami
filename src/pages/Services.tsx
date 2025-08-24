@@ -25,16 +25,13 @@ const Services = () => {
 
   useEffect(() => {
     getServices().then(data => {
-      console.log(data, 'services');
       if (data && data.services) {
         setServices(data.services);
         serviceCategories[0].services = data.services;
       } else {
-        console.log("No services data received");
         setServices([]);
       }
     }).catch(error => {
-      console.error("Error fetching services:", error);
       setServices([]);
     });
   }, [getServices]);

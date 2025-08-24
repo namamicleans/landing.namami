@@ -19,14 +19,6 @@ export const useServices = () => {
       return null;
     }
 
-    // Only show success toast for non-routine operations
-    if (result.code !== "SUCCESS") {
-      toast({
-        title: "Success",
-        description: result.message,
-      });
-    }
-
     return result.data;
   }, [toast]);
 
@@ -47,15 +39,7 @@ export const useCities = () => {
       });
       return [];
     }
-
-    // Only show success toast for non-routine operations
-    if (result.code !== "SUCCESS") {
-      toast({
-        title: "Success",
-        description: result.message,
-      });
-    }
-
+  
     return result.data || [];
   }, [toast]);
 

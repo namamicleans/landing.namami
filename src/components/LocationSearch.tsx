@@ -26,13 +26,11 @@ const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
   useEffect(() => {
     const fetchCities = async () => {
       const allCities = await getCities();
-      console.log("Fetched cities:", allCities);
       setCities(allCities);
     };
 
     const loadCityFromStorage = async () => {
       const selectedCity = await getSelectedCity();
-      console.log("Selected city from storage:", selectedCity);
       if (selectedCity && selectedCity.name) {
         setLocation(selectedCity.name);
       }

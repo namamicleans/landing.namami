@@ -12,7 +12,7 @@ export const getCities = async (): Promise<ServiceResult<City[]>> => {
     try {
         const response = await fetch(url);
         const result: ApiResponse<City[]> = await response.json();
-        console.log("Fetched cities:", result);
+
         if (!result.success) {
             return {
                 success: false,
