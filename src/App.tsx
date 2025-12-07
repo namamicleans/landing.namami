@@ -15,6 +15,7 @@ import BlogDetail from "./pages/BlogDetail";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import RefundCancellationPolicy from "./pages/RefundCancellationPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Redirect from "./pages/Redirect";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/redirect" element={<Redirect />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
