@@ -18,7 +18,7 @@ import ContactForm from "@/components/ContactForm";
 const leadershipTeam = [
   {
     name: "Bhuvnesh",
-    role: "Founder & CEO",
+    role: "Co-Founder & CEO",
     bio: "Leading Namami Cleans with a passion for sustainability and innovation, transforming how cleanliness is achieved.",
     image: "/team/bhuvneshCEO.jpg",
     social: {
@@ -29,7 +29,7 @@ const leadershipTeam = [
   },
   {
     name: "Devansh",
-    role: "COO",
+    role: "Co-Founder & COO",
     bio: "Ensuring financial stability while supporting innovative cleaning solutions that align with our values.",
     image: "/team/devanshCOO.jpg",
     social: {
