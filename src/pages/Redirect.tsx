@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '918770490169';
@@ -18,8 +18,15 @@ const REDIRECT_TYPES = {
 const Redirect = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    // If accessed via /scan, redirect to namamicleans.com
+    if (location.pathname === '/scan') {
+      window.location.href = 'https://namamicleans.com';
+      return;
+    }
+
     const type = searchParams.get('type');
     
     if (type && REDIRECT_TYPES[type as keyof typeof REDIRECT_TYPES]) {
@@ -35,7 +42,7 @@ const Redirect = () => {
 
       return () => clearTimeout(timer);
     }
-  }, [searchParams, navigate]);
+  }, [searchParams, navigate, location.pathname]);
 
   const type = searchParams.get('type');
   const isValidType = type && REDIRECT_TYPES[type as keyof typeof REDIRECT_TYPES];
