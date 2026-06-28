@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Badge } from "./ui/badge";
+import SafeImage from "./SafeImage";
 
 interface ServicePackage {
   type: "monthly" | "yearly";
@@ -57,7 +58,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       )}
     >
       <div className="relative">
-        <img
+        <SafeImage
           src={
             image ||
             "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
@@ -168,7 +169,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                 >
                   <div className="flex items-center gap-2">
                     {pkg.icon && (
-                      <img src={pkg.icon} alt={pkg.name} className="w-4 h-4" />
+                      <SafeImage src={pkg.icon} alt={pkg.name} className="w-4 h-4" hideOnError />
                     )}
                     <div>
                       <span className="text-sm font-medium">{pkg.name}</span>

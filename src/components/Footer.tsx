@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   Facebook,
   Instagram,
-  Twitter,
   Linkedin,
   Mail,
   Phone,
@@ -34,12 +33,6 @@ const Footer = () => {
                 className="text-gray-300 hover:text-secondary transition-colors"
               >
                 <Instagram size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-secondary transition-colors"
-              >
-                <Twitter size={20} />
               </a>
               <a
                 href="https://www.linkedin.com/company/namami-cleans"
@@ -109,7 +102,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/services#home-cleaning"
+                  to="/services?category=Home+Cleaning"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Home Cleaning
@@ -117,7 +110,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/services#office-cleaning"
+                  to="/services?category=Office+Cleaning"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Office Cleaning
@@ -125,7 +118,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/services#deep-cleaning"
+                  to="/services?category=Deep+Cleaning"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Deep Cleaning
@@ -133,7 +126,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/services#post-construction"
+                  to="/services?category=Post+Construction+Cleaning"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Post Construction Cleaning
@@ -141,7 +134,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/services#carpet-cleaning"
+                  to="/services?category=Carpet+Cleaning"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
                   Carpet Cleaning

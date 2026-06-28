@@ -8,8 +8,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { setSelectedCity, getSelectedCity } from "@/services/city";
 import { useCities } from "@/hooks/useServices";
+import { useCityContext } from "@/context/CityContext";
+import { reverseGeocode } from "@/services/city";
+import { useToast } from "@/hooks/use-toast";
 import { City } from "@/types/types";
 
 interface LocationSearchProps {
@@ -17,55 +19,69 @@ interface LocationSearchProps {
 }
 
 const LocationSearch: React.FC<LocationSearchProps> = ({ className }) => {
-  const [location, setLocation] = useState<string>("");
+  const { selectedCity, setSelectedCity } = useCityContext();
+  const { toast } = useToast();
+  const [location, setLocation] = useState<string>(selectedCity?.name || "");
   const [cities, setCities] = useState<City[]>([]);
   const [isLocating, setIsLocating] = useState(false);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const { getCities } = useCities();
 
   useEffect(() => {
-    const fetchCities = async () => {
-      const allCities = await getCities();
-      setCities(allCities);
-    };
+    getCities().then(setCities);
+  }, [getCities]);
 
-    const loadCityFromStorage = async () => {
-      const selectedCity = await getSelectedCity();
-      if (selectedCity && selectedCity.name) {
-        setLocation(selectedCity.name);
-      }
-    };
-
-    fetchCities();
-    loadCityFromStorage();
-  }, []);
+  useEffect(() => {
+    if (selectedCity?.name) setLocation(selectedCity.name);
+  }, [selectedCity]);
 
   const handleCitySelect = (city: City) => {
-    setLocation(city.name);
     setSelectedCity(city);
     setSuggestionsOpen(false);
+    toast({ title: `Showing services for ${city.name}`, description: "Services are being updated for your city." });
   }
 
 
   const handleLocate = () => {
-    setIsLocating(true);
-    if (navigator.geolocation) {
-      alert("Not available at the moment")
-      // navigator.geolocation.getCurrentPosition(
-      //   (position) => {
-      //     // Simulated geolocation result
-      //     setLocation("Downtown, New York");
-      //     setIsLocating(false);
-      //   },
-      //   (error) => {
-      //     console.error("Error getting location:", error);
-      //     setIsLocating(false);
-      //   },
-      // );
-    } else {
-      alert("Geolocation is not supported by this browser.");
+    if (!navigator.geolocation) {
+      toast({ title: "Not supported", description: "Your browser doesn't support geolocation." });
+      return;
     }
-    setIsLocating(false);
+    setIsLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const geo = await reverseGeocode(latitude, longitude);
+          if (!geo?.city) {
+            toast({ title: "Location error", description: "Could not determine your city. Please select manually.", variant: "destructive" });
+            return;
+          }
+          const googleCity = geo.city.toLowerCase().trim();
+          const matched = cities.find((c) => {
+            const dbCity = c.name.toLowerCase().trim();
+            return dbCity === googleCity || dbCity.includes(googleCity) || googleCity.includes(dbCity);
+          });
+          if (matched) {
+            setSelectedCity(matched);
+            toast({ title: `Showing services for ${matched.name}`, description: "Services are being updated for your city." });
+          } else {
+            toast({ title: "Not in service area", description: `We're not available in ${geo.city} yet. Please select a city manually.` });
+          }
+        } finally {
+          setIsLocating(false);
+        }
+      },
+      (error) => {
+        setIsLocating(false);
+        if (error.code === error.PERMISSION_DENIED) {
+          toast({ title: "Permission denied", description: "Allow location access in your browser settings to use this feature." });
+        } else {
+          toast({ title: "Location unavailable", description: "Could not get your location. Please select a city manually.", variant: "destructive" });
+        }
+      },
+      { timeout: 10000 }
+    );
   };
 
   return (

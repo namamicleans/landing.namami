@@ -17,14 +17,17 @@ import RefundCancellationPolicy from "./pages/RefundCancellationPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Redirect from "./pages/Redirect";
 import NotFound from "./pages/NotFound";
+import ServiceDetail from "./pages/ServiceDetail";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer";
+import { CityProvider } from "./context/CityContext";
 
 // Create a client
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
+    <CityProvider>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <TooltipProvider>
@@ -42,6 +45,7 @@ const App = () => {
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               <Route path="/refund-cancellation-policy" element={<RefundCancellationPolicy />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/service/:serviceCode" element={<ServiceDetail />} />
               <Route path="/redirect" element={<Redirect />} />
               <Route path="/scan" element={<Redirect />} />
               <Route path="*" element={<NotFound />} />
@@ -53,6 +57,7 @@ const App = () => {
         </TooltipProvider>
       </HelmetProvider>
     </QueryClientProvider>
+    </CityProvider>
   );
 };
 

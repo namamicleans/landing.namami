@@ -44,4 +44,19 @@ export const setSelectedCity = (city: City) => {
 export const getSelectedCity = () => {
     const city = Cookies.get("selected_city");
     return city ? JSON.parse(city) : null;
-}
+};
+
+export const reverseGeocode = async (
+    latitude: number,
+    longitude: number
+): Promise<{ city: string; state: string; pincode: string; address: string } | null> => {
+    const url = `${import.meta.env.VITE_SERVER_URL}/api/service/locations/reverse-geocode?latitude=${latitude}&longitude=${longitude}`;
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+        if (result.success && result.data?.city) return result.data;
+        return null;
+    } catch {
+        return null;
+    }
+};

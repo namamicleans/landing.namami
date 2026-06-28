@@ -533,11 +533,11 @@ const TermsAndConditions = () => {
                 Book Service Now
               </Button>
             </Link>
-            <Link to="/contact">
+            <a href="mailto:support@namamicleans.com">
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
                 Contact Support
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
