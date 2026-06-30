@@ -237,8 +237,8 @@ const Services = () => {
 
                 {/* Category Filter */}
                 <section className="bg-white border-b border-gray-200 sticky top-16 z-30">
-                    <div className="container mx-auto px-4 py-3 overflow-x-auto">
-                        <div className="flex gap-2 min-w-max">
+                    <div className="container mx-auto px-4 py-3">
+                        <div className="flex flex-wrap gap-2">
                             {categories.map((cat) => (
                                 <button
                                     key={cat}
